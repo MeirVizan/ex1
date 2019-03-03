@@ -1,15 +1,15 @@
 #pragma once
 #include "Shape.h"
-class Triangle :public Shape
+class Sub :public Shape
 {
 public:
-	Triangle(double m_width ,double m_height);
+	Sub();
 	virtual double getArea()const;
 	virtual double getPerimeter()const;
 	virtual void draw()const;
-	~Triangle();
+	~Sub();
 private:
-	double m_width;
-	double m_height;
+	std::shared_ptr<Shape> m_s1;
+	std::shared_ptr<Shape> m_s2;
 };
 
