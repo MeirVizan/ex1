@@ -2,7 +2,7 @@
 
 
 
-Circle::Circle(double raduis)
+Circle::Circle(double raduis=0)
 	:m_raduis(raduis),Shape("Circle")
 {
 }

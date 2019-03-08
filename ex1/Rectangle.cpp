@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(double height, double width)
+Rectangle::Rectangle(double height=0, double width=0)
 	:m_height(height),m_width(width),Shape("Rectangle")
 {
 }

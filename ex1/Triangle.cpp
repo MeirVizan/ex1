@@ -2,7 +2,7 @@
 
 
 
-Triangle::Triangle(double width, double height)
+Triangle::Triangle(double width =0, double height=0)
 	:m_height(height),m_width(width),Shape("Triangle")
 {
 }
