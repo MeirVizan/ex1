@@ -14,6 +14,6 @@ public:
 	virtual double getPerimeter()const = 0;
 	virtual void draw()const = 0;
 	virtual void printDimensions()const = 0;
-	~Shape();
+	virtual~Shape();
 };
 

@@ -21,11 +21,12 @@ public:
 	void help();
 	void create(std::string & command);
 	void add();
-	void mull(int n);
+	void mull();
 	void sub();
 	void area(int index);
 	int max();
 	int min();
+	void draw(int n);
 	~Controller();
 private:
 	std::vector<std::shared_ptr<Shape>> m_v;

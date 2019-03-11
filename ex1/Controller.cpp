@@ -2,10 +2,16 @@
 
 
 using namespace std;
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 Controller::Controller()
 {
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 void Controller::commend()
 {
@@ -46,8 +52,7 @@ std::cout << "\n" << R"(This is the shapes list:
 				}
 				if (command1 == "mul")
 				{
-					cin >> n;
-					mull(n);
+					mull();
 				}
 				if (command1 == "add")
 				{
@@ -65,6 +70,11 @@ std::cout << "\n" << R"(This is the shapes list:
 				{
 					std::cout<<max() << std::endl;
 				}
+				if (command1 == "draw")
+				{
+					std::cin >> n;
+					draw(n);
+				}
 				if (command1 == "del")
 				{
 					int index;
@@ -76,6 +86,9 @@ std::cout << "\n" << R"(This is the shapes list:
 
 	cout << "goodbye";
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 void Controller::help()
 {
@@ -103,6 +116,9 @@ This is the shapes list:
 Please enter a command ("help" for command list): )";
 
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 void Controller::create(std::string & command)
 {
@@ -128,6 +144,9 @@ void Controller::create(std::string & command)
 		m_v.push_back(std::make_shared<Triangle>(l, h));
 	}
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 void Controller::add()
 {
@@ -136,13 +155,21 @@ void Controller::add()
 	cin >> arg1 >> arg2;
 	m_v.push_back(std::make_shared<Add>(m_v[arg1], m_v[arg2]));
 }
-void Controller::mull(int n)
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
+
+void Controller::mull()
 {
 	int arg1, mul;
-	cout << "Enter indexes of two shapes\n";
+	cout << "Enter indexes of shape and times\n";
 	cin >> arg1 >> mul;
 	m_v.push_back(std::make_shared<Multiply>(m_v[arg1],mul));
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
+
 void Controller::sub()
 {
 	int arg1, arg2;
@@ -150,16 +177,23 @@ void Controller::sub()
 	cin >> arg1 >> arg2;
 	m_v.push_back(std::make_shared<Sub>(m_v[arg1], m_v[arg2]));
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
+
 void Controller::area(int index)
 {
 	for (int i=0 ;i<m_v.size();i++)
 	{
 		if (i == index)
 		{
-			std::cout<< m_v[i]->getArea();
+			std::cout<< m_v[i]->getArea()<<std::endl;
 		}
 	}
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 int Controller::max()
 {
@@ -173,6 +207,9 @@ int Controller::max()
 	}
 	return _max;
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 int Controller::min()
 {
@@ -186,7 +223,21 @@ int Controller::min()
 	}
 	return minimum;
 }
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
+void Controller::draw(int n)
+{
+	for (int i = 0; i < m_v.size(); i++)
+	{
+		if (i == n)
+			m_v[i]->draw();
+	}
+}
+/////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////
 
 Controller::~Controller()
 {
