@@ -31,7 +31,10 @@ double Multiply::getPerimeter() const
 
 void Multiply::draw() const
 {
-	
+	m_s1->printDimensions();
+	std::cout<<" * ("<<m_times<<") times " << std::endl;
+	m_s1->draw();
+
 }
 /////////////////////////////////////////////////////
 //
