@@ -75,6 +75,12 @@ std::cout << "\n" << R"(This is the shapes list:
 					std::cin >> n;
 					draw(n);
 				}
+				if (command1 == "same")
+				{
+					cout << "which number do you want to check :" << endl;
+					cin >> n;
+					same(n);
+				}
 				if (command1 == "del")
 				{
 					int index;
@@ -238,6 +244,21 @@ void Controller::draw(int n)
 /////////////////////////////////////////////////////
 //
 /////////////////////////////////////////////////////
+
+void Controller::same(int n)
+{
+	double _area = m_v[n]->getArea(), _per = m_v[n]->getPerimeter();
+	for (int i = 0; i < m_v.size(); i++)
+	{
+		if (m_v[i]->getArea() == _area && m_v[i]->getPerimeter() == _per && i!=n) {
+			cout << i << " ";
+			m_v[i]->printDimensions();
+			cout << endl;
+		}
+
+	}
+}
+
 
 Controller::~Controller()
 {

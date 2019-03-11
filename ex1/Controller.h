@@ -27,6 +27,7 @@ public:
 	int max();
 	int min();
 	void draw(int n);
+	void same(int n);
 	~Controller();
 private:
 	std::vector<std::shared_ptr<Shape>> m_v;
