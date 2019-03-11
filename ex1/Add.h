@@ -1,5 +1,6 @@
 #pragma once
 #include "Shape.h"
+
 class Add :public Shape
 {
 public:
@@ -7,6 +8,7 @@ public:
 	virtual double getArea()const;
 	virtual double getPerimeter()const;
 	virtual void draw()const;
+	virtual void printDimensions()const;
 	~Add();
 private:
 	std::shared_ptr<Shape> m_s1;

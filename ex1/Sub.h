@@ -7,6 +7,7 @@ public:
 	virtual double getArea()const;
 	virtual double getPerimeter()const;
 	virtual void draw()const;
+	virtual void printDimensions()const;
 	~Sub();
 private:
 	std::shared_ptr<Shape> m_s1;

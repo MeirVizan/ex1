@@ -2,15 +2,14 @@
 
 
 
-Multiply::Multiply(std::shared_ptr<Shape> s1 , std::shared_ptr<Shape> s2)
-	:m_s1(s1),m_s2(s2),
-	Shape(std::string("Multiple (").append(s1->getName()).append(" - ").append(s2->getName()).append(")"))
+Multiply::Multiply(std::shared_ptr<Shape> s1 , int times)
+	:m_s1(s1),m_times(times)
 {
 }
 
 double Multiply::getArea() const
 {
-	return ;
+	return 0;
 }
 
 double Multiply::getPerimeter() const
@@ -19,6 +18,10 @@ double Multiply::getPerimeter() const
 }
 
 void Multiply::draw() const
+{
+}
+
+void Multiply::printDimensions() const
 {
 }
 

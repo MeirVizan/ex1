@@ -1,16 +1,5 @@
 #include "Controller.h"
-#include "Add.h"
-#include "Multiply.h"
-#include "Shape.h"
-#include "Circle.h"
-#include "Rectangle.h"
-#include <vector>
-#include <string>
-#include "Sub.h"
-#include "Triangle.h"
-#include <iostream>
-#include <algorithm>
-#include <sstream>
+
 
 using namespace std;
 
@@ -20,80 +9,182 @@ Controller::Controller()
 
 void Controller::commend()
 {
-	std::vector<std::shared_ptr<Shape>> v;
-	v.push_back(std::make_shared<Circle>());
-	v.push_back(std::make_shared<Rectangle>());
-	v.push_back(std::make_shared<Triangle>());
-	std::string command;
+	
+	std::string command1,command2;
+	int n;
 	do
 	{
 		int i = 0;
 		std::cout << "list of shapes:\n";
-		for (auto &e : v)
+		for (auto &e : m_v)
 		{
-			std::cout << i++ << ": " << e->getName() << " Area = " << e->getArea() << "\n";
+			std::cout << i++<<" : ";
+			e->printDimensions();
+			std::cout<< "\n";
 		}
-				std::cout << "\n" << R"(Please enter one of the following commands:
-		R - To create a new Rectangle
-		C - To create a new circle
-		M - To add multiple shapes
-		D - To delete a shape from the list
-		exit - To exit
-		)";
-				std::cin >> command;
-				std::transform(command.begin(), command.end(), command.begin(), ::toupper);
-				if (command == "cre r")
+std::cout << "\n" << R"(This is the shapes list:
+ Please enter a command ("help" for command list): 
+)";
+				std::cin >> command1;
+				std::transform(command1.begin(), command1.end(), command1.begin(), ::tolower);
+				//std::transform(command2.begin(), command2.end(), command2.begin(), ::tolower);
+
+				if (command1 == "help")
 				{
-					double h, w;
-					cout << "Enter height then width\n";
-					cin >> h >> w;
-					v.push_back(std::make_shared<Rectangle>(h, w));
+					help();
 				}
-				if (command == "cre c")
+				if (command1 == "cre")
 				{
-					double r;
-					cout << "Enter raduis\n";
-					cin >> r;
-					v.push_back(std::make_shared<Circle>(r));
+					std::cout << "which shape do you want to create :" << std::endl;
+					std::cin >> command2;
+					create(command2);	
 				}
-				if (command == "cre t")
+				if (command1 == "area")
 				{
-					int l, h;
-					cout << "Enter indexes of two shapes\n";
-					cin >> l >> h;
-					v.push_back(std::make_shared<Triangle>(l,h));
+					std::cin >> n;
+					area(n);
 				}
-				if (command == "mul")
+				if (command1 == "mul")
 				{
-					int arg1, arg2;
-					cout << "Enter indexes of two shapes\n";
-					cin >> arg1 >> arg2;
-					v.push_back(std::make_shared<Multiply>(v[arg1], v[arg2]));
+					cin >> n;
+					mull(n);
 				}
-				if (command == "add")
+				if (command1 == "add")
 				{
-					int arg1, arg2;
-					cout << "Enter indexes of two shapes\n";
-					cin >> arg1 >> arg2;
-					v.push_back(std::make_shared<Add>(v[arg1], v[arg2]));
+					add();
 				}
-				if (command == "sub")
+				if (command1 == "sub")
 				{
-					int arg1, arg2;
-					cout << "Enter indexes of two shapes\n";
-					cin >> arg1 >> arg2;
-					v.push_back(std::make_shared<Sub>(v[arg1], v[arg2]));
+					sub();
 				}
-				if (command == "del")
+				if (command1 == "min")
+				{
+					std::cout<<min()<<std::endl;
+				}
+				if (command1 == "max")
+				{
+					std::cout<<max() << std::endl;
+				}
+				if (command1 == "del")
 				{
 					int index;
 					cout << "Enter the number of the shape from the list:\n";
 					cin >> index;
-					v.erase(v.begin() + index);
+					m_v.erase(m_v.begin() + index);
 				}
-	} while (command != "exit");
+	} while (command1 != "exit");
 
+	cout << "goodbye";
+}
 
+void Controller::help()
+{
+	std::cout << "\n" << R"(Following is the list of the calculator's available commands:
+ cre(ate) #shape <R - rectangle | T-triangle | C- circle>
+ area num - Computes the area of shape #num
+ per(imeter) num - Computes the perimeter of shape #num
+ draw num - Draw the shape #num
+ mul(tiply) num x - Creates a function that is the multiplication         
+ of shape #num x times 
+add num1 num2 - Creates a function that is the sum of function             
+#num1 and function #num2 
+sub num1 num2 - Creates a function that is the subtraction of           
+function #num1 and function #num2 
+min n #num1-#numN - Returns the smallest area in the chosen          
+shapes. n - the requested shapes: #num1...  
+max n #num1-#numN - Returns the biggest area in the chosen shapes.            
+n - the requested shapes: #num1... 
+same num - Returns shapes with which have the same area and            
+perimeter to the shape #num  
+del(ete) num - Deletes function #num from function list 
+help - Prints this help screen 
+exit - Exits the program 
+This is the shapes list: 
+Please enter a command ("help" for command list): )";
+
+}
+
+void Controller::create(std::string & command)
+{
+	if (command == "r")
+	{
+		double h, w;
+		cout << "Enter height then width\n";
+		cin >> h >> w;
+		m_v.push_back(std::make_shared<Rectangle>(h, w));
+	}
+	if (command == "c")
+	{
+		double r;
+		cout << "Enter raduis\n";
+		cin >> r;
+		m_v.push_back(std::make_shared<Circle>(r));
+	}
+	if (command == "t")
+	{
+		int l, h;
+		cout << "Enter height then width\n";
+		cin >> l >> h;
+		m_v.push_back(std::make_shared<Triangle>(l, h));
+	}
+}
+
+void Controller::add()
+{
+	int arg1, arg2;
+	cout << "Enter indexes of two shapes\n";
+	cin >> arg1 >> arg2;
+	m_v.push_back(std::make_shared<Add>(m_v[arg1], m_v[arg2]));
+}
+void Controller::mull(int n)
+{
+	int arg1, mul;
+	cout << "Enter indexes of two shapes\n";
+	cin >> arg1 >> mul;
+	m_v.push_back(std::make_shared<Multiply>(m_v[arg1],mul));
+}
+void Controller::sub()
+{
+	int arg1, arg2;
+	cout << "Enter indexes of two shapes\n";
+	cin >> arg1 >> arg2;
+	m_v.push_back(std::make_shared<Sub>(m_v[arg1], m_v[arg2]));
+}
+void Controller::area(int index)
+{
+	for (int i=0 ;i<m_v.size();i++)
+	{
+		if (i == index)
+		{
+			std::cout<< m_v[i]->getArea();
+		}
+	}
+}
+
+int Controller::max()
+{
+	int _max = 0;
+	for (int i = 0; i < m_v.size(); i++)
+	{
+		if (m_v[i]->getArea() > _max)
+		{
+			_max = m_v[i]->getArea();
+		}
+	}
+	return _max;
+}
+
+int Controller::min()
+{
+	int minimum=100;
+	for (int i = 0; i < m_v.size(); i++)
+	{
+		if (m_v[i]->getArea() < minimum)
+		{
+			minimum = m_v[i]->getArea();
+		}
+	}
+	return minimum;
 }
 
 

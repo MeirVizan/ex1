@@ -7,6 +7,7 @@ public:
 	virtual double getArea()const;
 	virtual double getPerimeter()const;
 	virtual void draw()const;
+	virtual void printDimensions()const;
 	~Triangle();
 private:
 	double m_width;

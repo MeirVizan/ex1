@@ -2,8 +2,8 @@
 
 
 
-Triangle::Triangle(double width =0, double height=0)
-	:m_height(height),m_width(width),Shape("Triangle")
+Triangle::Triangle(double width , double height)
+	:m_height(height),m_width(width)
 {
 }
 
@@ -14,11 +14,22 @@ double Triangle::getArea() const
 
 double Triangle::getPerimeter() const
 {
-	return 0;
+	return 2*(std::sqrt((m_height*m_height)+(m_width*m_width)))+m_width;
 }
 
 void Triangle::draw() const
 {
+	std::cout << "\n" << R"(*
+						   * *
+						  *   *
+						 *     *
+						*       *
+					   ***********)";
+}
+
+void Triangle::printDimensions() const
+{
+	std::cout << "Triangle" << "(" << " h : " << m_height << " w : " << m_width << ")";
 }
 
 

@@ -2,8 +2,9 @@
 
 
 
-Circle::Circle(double raduis=0)
-	:m_raduis(raduis),Shape("Circle")
+
+Circle::Circle(double raduis )
+	:m_raduis(raduis)
 {
 }
 
@@ -19,6 +20,23 @@ double Circle::getPerimeter() const
 
 void Circle::draw() const
 {
+	std::cout << "\n" << R"( 
+		            ****
+				  **    **
+				 **      **
+				 *        *
+				 *        *
+				 *        *        
+				 *        *
+				 **      **
+				  **    ** 
+					****)";
+
+}
+
+void Circle::printDimensions() const
+{
+	std::cout << "Circle" << "( " <<"r : " << m_raduis << ")";
 }
 
 
